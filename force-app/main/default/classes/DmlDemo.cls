@@ -27,4 +27,17 @@ public class DmlDemo {
         acc.name = 'SoftInnovas Inc';
         update acc;
         }
+
+    public static void dmlUpdateDemo_2(){
+        Account acc = [Select Id,name from Account limit 1 ];
+
+        Contact con = new Contact();
+        con.FirstName = 'New Contact From vs ';
+        con.LastName = 'Helloooo';
+        con.AccountId = acc.Id;
+
+        insert con;
+        system.debug('New contact created on this account : '+acc);
+
+    }
 }
