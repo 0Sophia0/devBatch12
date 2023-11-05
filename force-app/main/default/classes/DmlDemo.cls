@@ -40,4 +40,39 @@ public class DmlDemo {
         system.debug('New contact created on this account : '+acc);
 
     }
+
+    public static void dmlUpdateDemo_2_CO(){
+        Salesforce_Project__c sp = [Select id,Name from Salesforce_Project__c ORDER BY createdDate DESC limit 1];
+
+        Salesforce_Ticket__c st = new Salesforce_Ticket__c();
+        st.Subject__c='New salesforce ticket from vs code hi!';
+        st.Salesforce_Project__c = sp.id;
+        insert st;
+    }
+
+    public static void dmlMultipleRecordInsert(){
+        list<Account> listAcc = new list<Account>();
+
+        for(Integer i=0; i<10 ; i++){
+            Account acc = new Account();
+            acc.Name = 'Account from vs code multiple insert'+i;
+            listAcc.add(acc);
+        }
+        insert listAcc;
+    }
+
+    public static void dmlMultipleRecordUpdate(){
+        List<Account> listAcc = [Select id, name from Account  ORDER BY createdDate DESC limit 10];
+
+        list<Account> updateList = new List<Account>();
+
+        for(Account acc : listAcc){
+            acc.Name = 'Updated Name';
+            updateList.add(acc);
+        }
+        if(!updateList.isEmpty()){
+            update updateList;
+        }
+       
+    }
 }
